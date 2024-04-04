@@ -19,4 +19,4 @@ ADD Salt varchar(12) NOT NULL;
 ALTER TABLE [dbo].[Users_Master]
 ALTER COLUMN Pw varchar(150) NOT NULL;
 
-DBCC CHECKIDENT ('Users_Master', RESEED, 1);
+DBCC CHECKIDENT ('Users_Master', RESEED, 0);
