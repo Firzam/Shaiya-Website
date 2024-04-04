@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: "Stop previous node server"
-        run: docker stop Shaiya-Website
+        run: docker stop Shaiya-Website && docker rm Shaiya-Website
       - name: "Start node server"
         if: always()
         run: docker run --name Shaiya-Website -d
