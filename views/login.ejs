@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shaiya Private Server</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <h1>Welcome to Shaiya Private Server</h1>
+        <a href="/index">Home</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <script src="/js/main.js"></script>
+    </nav>
+
+    <div class="container">
+        <h2>Login</h2>
+
+        <form action="/login" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="userID" name="userID" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>
