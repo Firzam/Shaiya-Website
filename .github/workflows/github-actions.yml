@@ -30,7 +30,7 @@ jobs:
         run: docker stop Shaiya-Website
       - name: "Start node server"
         if: always()
-        run: docker run --name Shaiya-Website \
+        run: docker run --name Shaiya-Website -d \
             -e MSSQL_USER=${{ secrets.MSSQL_USER }} \
             -e MSSQL_PASSWORD=${{ secrets.MSSQL_PASSWORD }} \
             -e MSSQL_DB=${{ secrets.MSSQL_DB }} \
