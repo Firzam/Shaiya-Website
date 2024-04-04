@@ -12,7 +12,7 @@ jobs:
       - name: "Building dev image"
         run: docker build --no-cache -t ayerman/shaiya-website:latest .
   
-  Copy-Nginx-Config:
+  Deploy-Nginx-Config:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
         run: docker stop Shaiya-Website
       - name: "Start node server"
         if: always()
-        run: docker run -it --name Shaiya-Website \
+        run: docker run --name Shaiya-Website \
             -e MSSQL_USER=${{ secrets.MSSQL_USER }} \
             -e MSSQL_PASSWORD=${{ secrets.MSSQL_PASSWORD }} \
             -e MSSQL_DB=${{ secrets.MSSQL_DB }} \
