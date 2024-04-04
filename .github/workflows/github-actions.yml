@@ -1,0 +1,38 @@
+name: Deploy Shaiya WebSite
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Build-Docker-Image:
+    runs-on: self-hosted
+    if: 
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Building dev image"
+        run: docker build --no-cache -t ayerman/shaiya-website:latest .
+  
+  Copy-Nginx-Config:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Sync the nginx conf file"
+        run: rsync -avzP shaiya.conf /etc/nginx/conf.d/shaiya.conf
+      - name: "Restart nginx"
+        run: docker restart nginx
+
+  Deploy-Website:
+    runs-on: self-hosted
+    needs: Build-Docker-Image
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Stop previous node server"
+        run: docker stop Shaiya-Website
+      - name: "Start node server"
+        if: always()
+        run: docker run -it --name Shaiya-Website \
+            -e MSSQL_USER=${{ secrets.MSSQL_USER }} \
+            -e MSSQL_PASSWORD=${{ secrets.MSSQL_PASSWORD }} \
+            -e MSSQL_DB=${{ secrets.MSSQL_DB }} \
+            -e MSSQL_ADDR=${{ secrets.MSSQL_ADDR }} \
+            ayerman/shaiya-website:latest
