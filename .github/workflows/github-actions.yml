@@ -31,8 +31,8 @@ jobs:
       - name: "Start node server"
         if: always()
         run: docker run --name Shaiya-Website -d \
-            -e MSSQL_USER=${{ secrets.MSSQL_USER }} \
-            -e MSSQL_PASSWORD=${{ secrets.MSSQL_PASSWORD }} \
-            -e MSSQL_DB=${{ secrets.MSSQL_DB }} \
-            -e MSSQL_ADDR=${{ secrets.MSSQL_ADDR }} \
+            -e MSSQL_USER="${{ secrets.MSSQL_USER }}" \
+            -e MSSQL_PASSWORD="${{ secrets.MSSQL_PASSWORD }}" \
+            -e MSSQL_DB="${{ secrets.MSSQL_DB }}" \
+            -e MSSQL_ADDR="${{ secrets.MSSQL_ADDR }}" \
             ayerman/shaiya-website:latest
